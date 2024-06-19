@@ -17,8 +17,19 @@ const Form = () => {
         [e.target.id]: isNumberField ? +e.target.value : e.target.value
     })
   }
+
+  const isValidActivity = () => {
+    const { name, calorias } = activity
+    return name.trim() !== '' && calorias > 0
+  }
+
+  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault()
+    console.log('enviando')
+  }
+
   return (
-    <form className="bg-white p-5 space-y-5 rounded shadow-md">
+    <form onSubmit={handleSubmit} className="bg-white p-5 space-y-5 rounded shadow-md">
         <div className="grid grid-cols-1 gap-3">
             <label htmlFor="categoria" className="font-bold">Categoria</label>
             <select 
@@ -57,10 +68,10 @@ const Form = () => {
             />
         </div>
         <input 
-            type="button" 
-            value="Guardar actividad"
-            className="w-full bg-gray-800 text-white font-bold p-3 rounded cursor-pointer uppercase hover:bg-gray-900"
-
+            type="submit" 
+            value={`${activity.categoria == 1 ? 'Guardar comida' : 'Guardar ejercicio'}`}
+            className="disabled:opacity-40 disabled:cursor-not-allowed w-full bg-gray-800 text-white font-bold p-3 rounded cursor-pointer uppercase hover:bg-gray-900"
+            disabled={!isValidActivity()}
         />
     </form>
   )
