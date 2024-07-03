@@ -13,12 +13,14 @@ const ActivityList = ({ activities,dispatch }: ActivityListProps) => {
     (category: Activity['categoria']) =>  categories.map(cat => cat.id === category ? cat.name : '')
     ,[])
 
+  const isEmpty = useMemo(() => activities.length === 0, [activities])
   const handleActiveId = (id: Activity['id']) => {
     dispatch({type: 'set-activeId', payload: {id}})
   }
   return (
     <>
         <h2 className="text-4xl font-bold text-slate-600 text-center">Comida y actividades</h2>
+        {isEmpty ? <p className="text-center mt-5">No hay actividades aun...</p> : null}
         {activities.map((activity) => (
             <div key={activity.id} className="bg-white shadow-lg px-5 py-10 flex justify-between mt-5">
                 <div className="space-y-2 relative">
