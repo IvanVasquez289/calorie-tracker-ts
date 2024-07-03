@@ -7,7 +7,8 @@ type FormProps = {
   dispatch: Dispatch<ActivityActions>
 }
 
-const initialState = {
+const initialState: Activity = {
+  id: '',
   categoria: 1,
   name: '',
   calorias: 0,
@@ -32,7 +33,7 @@ const Form = ({dispatch}:FormProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch({type:'save-activity', payload:{ newActivity : activity}})
+    dispatch({type:'save-activity', payload:{ newActivity: {...activity, id: crypto.randomUUID()}}})
 
     setActivity(initialState)
   }
