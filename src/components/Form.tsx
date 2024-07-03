@@ -45,7 +45,12 @@ const Form = ({dispatch,activeId,activities}:FormProps) => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault()
-    dispatch({type:'save-activity', payload:{ newActivity: {...activity, id: crypto.randomUUID()}}})
+
+    if(activeId){
+      dispatch({type: 'update-activity', payload: { updatedActivity: activity}})
+    }else {
+      dispatch({type:'save-activity', payload:{ newActivity: {...activity, id: crypto.randomUUID()}}})
+    }
 
     setActivity(initialState)
   }
