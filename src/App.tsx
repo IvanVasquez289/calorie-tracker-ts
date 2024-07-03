@@ -16,6 +16,8 @@ function App() {
         <div className="max-w-4xl mx-auto">
           <Form
             dispatch={dispatch}
+            activeId={state.activeId}
+            activities={state.activities}
           />
         </div>
      </section>
